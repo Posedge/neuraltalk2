@@ -56,18 +56,21 @@
         div.css('background-image', 'url(' + div.data('image') + ')');
       }
     }
-    $(window).scroll(loadVisible);
-    $.getJSON('vis.json?t=' + +new Date, function (data) {
-      $('#results').html('');
-      for (var i = 0; i < data.length; i++) {
-        var path = 'imgs/img' + (i + 1) + '.jpg';
-        $('<div class="result">')
-          .data('image', path)
-          .append($('<p>').text(data[i].caption))
-          .appendTo('#results');
-      }
-      loadVisible();
-    });
+    function showImg() {
+		$(window).scroll(loadVisible);
+		$.getJSON('vis.json?t=' + +new Date, function (data) {
+		  $('#results').html('');
+		  for (var i = 0; i < data.length; i++) {
+			var path = 'imgs/img' + (i + 1) + '.jpg';
+			$('<div class="result">')
+			  .data('image', path)
+			  .append($('<p>').text(data[i].caption))
+			  .appendTo('#results');
+		  }
+		  loadVisible();
+		});
+	}
+	setInterval(showImg, 1000);
     </script>
   </body>
 </html>
